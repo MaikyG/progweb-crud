@@ -32,7 +32,7 @@
  //ler um fabricante
 
  function lerUmProduto($conexao, $id){
-     $sql = "SELECT id, nome FROM fabricantes WHERE id = $id";
+     $sql = "SELECT id, nome, preco, quantidade, descricao, fabricante_id FROM produtos WHERE id = $id";
 
      $resultado = mysqli_query($conexao,$sql) or die (mysqli_error($conexao));
 
