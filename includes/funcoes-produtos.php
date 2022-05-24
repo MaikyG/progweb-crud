@@ -6,8 +6,9 @@
  //ler fabricante
 
  function lerProdutos($conexao){
-   $sql= "SELECT id, nome, preco, quantidade, descricao, fabricante_id FROM produtos ORDER BY nome";
-   
+   //$sql= "SELECT id, nome, preco, quantidade, descricao, fabricante_id FROM produtos ORDER BY nome";
+   $sql = "SELECT produtos.id, produtos.nome AS produto, produtos.quantidade AS quantidade, produtos.preco AS preco, produtos.descricao AS descricao, fabricantes.nome AS fabricante FROM produtos  INNER JOIN fabricantes ON produtos.fabricante_id = fabricantes.id ORDER BY produto";
+
    $resultado= mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
    
    $produtos=[];
@@ -21,8 +22,10 @@
 
 //inserir
 
- function inserirProduto($conexao, $nome){
+ function inserirProduto($conexao, $nome,$preco,$quantidade,$descricao, $fabricanteId){
    
+    $sql= "INSERT INTO produtos (nome, preco, quantidade, descricao, fabricante_id) VALUE ('$nome', '$preco', '$quantidade', '$descricao', '$fabricanteId')";
+
      mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
  }
 
@@ -37,14 +40,14 @@
  }
 
  //atualizar fabricante
- function atualizarFabricante($conexao,$id,$nome){
-     $sql = "UPDATE fabricantes SET nome = '$nome' WHERE id = $id ";
+ function atualizarProduto($conexao,$id,$nome){
+     $sql = "UPDATE produtos SET nome = '$nome' WHERE id = $id ";
      mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
  }
 
  //excluir fabricante
- function excluirFabricante($conexao,$id){
-     $sql = "DELETE FROM fabricantes WHERE id = $id ";
+ function excluirProduto($conexao,$id){
+     $sql = "DELETE FROM produtos WHERE id = $id ";
      mysqli_query($conexao,$sql) or die(mysqli_error($conexao));
  }
 
