@@ -40,8 +40,8 @@
  }
 
  //atualizar fabricante
- function atualizarProduto($conexao,$id,$nome){
-     $sql = "UPDATE produtos SET nome = '$nome' WHERE id = $id ";
+ function atualizarProduto($conexao, $id, $nome, $preco, $quantidade, $descricao, $fabricanteId){
+     $sql = "UPDATE produtos SET nome = '$nome', preco = '$preco', quantidade = '$quantidade', descricao = '$descricao', fabricante_id = '$fabricanteId'  WHERE id = $id ";
      mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
  }
 
@@ -51,3 +51,6 @@
      mysqli_query($conexao,$sql) or die(mysqli_error($conexao));
  }
 
+ function formataMoeda($valor){
+     return"R$ ".number_format($valor, 2 , "," , "." );
+ }
